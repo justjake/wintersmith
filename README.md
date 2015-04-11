@@ -1,8 +1,13 @@
 #![Wintersmith](http://wintersmith.io/images/wintersmith.svg)
 
-Wintersmith is a simple yet flexible static site generator. It takes contents (markdown, less, scripts, etc), transforms them using plugins and outputs a static website (html, css, images, etc) that you can host anywhere.
+Wintersmith is a simple yet flexible static site generator. It takes contents
+(markdown, less, scripts, etc), transforms them using plugins and outputs a
+static website (html, css, images, etc) that you can host anywhere.
 
-It ships with plugins for [markdown](http://daringfireball.net/projects/markdown/) and [jade templates](https://github.com/visionmedia/jade), if you need something else check the [plugin listing][plugin-listing] or [write your own][plugin-guide]!
+It ships with plugins for
+[markdown](http://daringfireball.net/projects/markdown/) and [jade
+templates](https://github.com/visionmedia/jade), if you need something else
+check the [plugin listing][plugin-listing] or [write your own][plugin-guide]!
 
 ## Resources
 
@@ -26,13 +31,16 @@ First install wintersmith using [npm](http://npmjs.org/):
 $ npm install wintersmith -g
 ```
 
-This will install wintersmith globally on your system so that you can access the `wintersmith` command from anywhere. Once that is complete run:
+This will install wintersmith globally on your system so that you can access
+the `wintersmith` command from anywhere. Once that is complete run:
 
 ```bash
 $ wintersmith new <path>
 ```
 
-Where `<path>` is the location you want the site to be generated. This creates a skeleton site with a basic set of templates and some articles, while not strictly needed it's a good starting point.
+Where `<path>` is the location you want the site to be generated. This creates
+a skeleton site with a basic set of templates and some articles, while not
+strictly needed it's a good starting point.
 
 Now enter the directory and start the preview server:
 
@@ -41,7 +49,8 @@ $ cd <path>
 $ wintersmith preview
 ```
 
-At this point you are ready to start customizing your site. Point your browser to `http://localhost:8080` and start editing templates and articles.
+At this point you are ready to start customizing your site. Point your browser
+to `http://localhost:8080` and start editing templates and articles.
 
 When done run:
 
@@ -49,17 +58,22 @@ When done run:
 $ wintersmith build
 ```
 
-This generates your site and places it in the `build/` directory - all ready to be copied to your web server!
+This generates your site and places it in the `build/` directory - all ready to
+be copied to your web server!
 
 And remember to give the old `--help` a look :-)
 
 ## Overview
 
-A wintersmith site is built up of three main components: contents, views and templates.
+A wintersmith site is built up of three main components: contents, views and
+templates.
 
-Contents is a directory where all the sites raw material goes (markdown files, images, javascript etc). This directory is then scanned to produce what's internally called a ContentTree.
+Contents is a directory where all the sites raw material goes (markdown files,
+images, javascript etc). This directory is then scanned to produce what's
+internally called a ContentTree.
 
-The ContentTree is a nested object built up of ContentPlugins and looks something like this:
+The ContentTree is a nested object built up of ContentPlugins and looks
+something like this:
 
 ```javascript
 {
@@ -73,19 +87,32 @@ The ContentTree is a nested object built up of ContentPlugins and looks somethin
 
 ![Wintersmith](http://wintersmith.io/images/flow.svg)
 
-This content tree is provided in full to the views when rendering. This gives you a lot of flexibility when writing plugins, you could for example write a plugin that generates a mosaic using images located in a specific directory.
+This content tree is provided in full to the views when rendering. This gives
+you a lot of flexibility when writing plugins, you could for example write a
+plugin that generates a mosaic using images located in a specific directory.
 
-Wintersmith comes with a default Page plugin that renders markdown content using templates. This plugin takes markdown (combined with some metadata, more on this later) compiles it and provides it to a template along with the content tree and some utility functions.
+Wintersmith comes with a default Page plugin that renders markdown content
+using templates. This plugin takes markdown (combined with some metadata, more
+on this later) compiles it and provides it to a template along with the content
+tree and some utility functions.
 
-This brings us to the second component, the template directory. All templates found in this directory are loaded and are also passed to the content plugins when rendering.
+This brings us to the second component, the template directory. All templates
+found in this directory are loaded and are also passed to the content plugins
+when rendering.
 
-By default only `.jade` templates are loaded, but you can easily add template plugins to use a template engine of your choosing.
+By default only `.jade` templates are loaded, but you can easily add template
+plugins to use a template engine of your choosing.
 
-Check the `examples/` directory for some inspiration on how you can use wintersmith or the [showcase](https://github.com/jnordberg/wintersmith/wiki/Showcase) to see what others are doing.
+Check the `examples/` directory for some inspiration on how you can use
+wintersmith or the
+[showcase](https://github.com/jnordberg/wintersmith/wiki/Showcase) to see what
+others are doing.
 
 ## Configuration
 
-Configuration can be done with command-line options, a config file or both. The config file will be looked for as `config.json` in the root of your site (you can set a custom path using `--config`).
+Configuration can be done with command-line options, a config file or both. The
+config file will be looked for as `config.json` in the root of your site (you
+can set a custom path using `--config`).
 
 ### Options
 
@@ -103,15 +130,22 @@ baseUrl      | `/`             | base url that site lives on, e.g. `/blog/`.
 hostname     | `null`          | hostname to bind preview server to, null = INADDR_ANY
 port         | `8080`          | port preview server listens on
 
-All paths can either be relative or absolute. Relative paths will be resolved from the working directory or `--chdir` if set.
+All paths can either be relative or absolute. Relative paths will be resolved
+from the working directory or `--chdir` if set.
 
 ## Content Plugins
 
-ContentPlugins transform content, each item in the content tree is represented by a ContentPlugin instance. Content plugins can be created from files matching a glob pattern or by generators.
+ContentPlugins transform content, each item in the content tree is represented
+by a ContentPlugin instance. Content plugins can be created from files matching
+a glob pattern or by generators.
 
-The ContentPlugin class is that all content plugins inherit from. Subclasses have to implement the `getFilename` and `getView` instance methods and the `fromFile` class method - more info in the [plugin guide][plugin-guide].
+The ContentPlugin class is that all content plugins inherit from. Subclasses
+have to implement the `getFilename` and `getView` instance methods and the
+`fromFile` class method - more info in the [plugin guide][plugin-guide].
 
-All content plugins have the following properties (a property in wintersmith is simply a shortcut to a getter. i.e. `item.filename` is the same as calling `item.getFilename()`)
+All content plugins have the following properties (a property in wintersmith is
+simply a shortcut to a getter. i.e. `item.filename` is the same as calling
+`item.getFilename()`)
 
 Property     | Getter signature | Description
 -------------|------------------|---------------------
@@ -121,7 +155,8 @@ url          | `getUrl(base)`   | url for the content. *base* is from where this
 
 ## The Page plugin
 
-Wintersmith ships with a page plugin. This plugin is what the markdown page and many other content plugins build upon.
+Wintersmith ships with a page plugin. This plugin is what the markdown page and
+many other content plugins build upon.
 
 ### Model
 
@@ -139,7 +174,8 @@ body         | markdown source
 html         | parsed markdown as html
 
 
-A MarkdownPage is either a markdown file with metadata on top or a json file located in the contents directory.
+A MarkdownPage is either a markdown file with metadata on top or a json file
+located in the contents directory.
 
 ```markdown
 ---
@@ -171,28 +207,42 @@ Pages are by default rendered using the `template` view. This view passes the pa
 
 ### Links
 
-All relative links in the markdown will be resolved correctly when rendering. This means you can just place *image.png* in the same directory and simply include it in your markdown as `![my image](image.png)`
+All relative links in the markdown will be resolved correctly when rendering.
+This means you can just place *image.png* in the same directory and simply
+include it in your markdown as `![my image](image.png)`
 
-This is especially convenient when using a markdown editor (read [Mou](http://mouapp.com/) if you're on a mac).
+This is especially convenient when using a markdown editor (read
+[Mou](http://mouapp.com/) if you're on a mac).
 
 ### Metadata
 
-Metadata is parsed using [js-yaml](https://github.com/nodeca/js-yaml) and will be accessible in the template as `page.metadata`.
+Metadata is parsed using [js-yaml](https://github.com/nodeca/js-yaml) and will
+be accessible in the template as `page.metadata`.
 
-There are two special metadata keys, The first one is `template` which specifies what template to render the page with. If the key is omitted or set to `none` the page will not be rendered (but still available in the content tree).
+There are two special metadata keys, The first one is `template` which
+specifies what template to render the page with. If the key is omitted or set
+to `none` the page will not be rendered (but still available in the content
+tree).
 
-The second one is `filename` which can be used to override the output filename of the page. See [filename templating](https://github.com/jnordberg/wintersmith/wiki/Page-Plugin#filename-templating) for advanced usage.
+The second one is `filename` which can be used to override the output filename
+of the page. See [filename
+templating](https://github.com/jnordberg/wintersmith/wiki/Page-Plugin#filename-templating)
+for advanced usage.
 
 ### Templates
 
-When a page is rendered to a template the page instance is available as `page` in the template context. The content tree is also available as `contents` and `config.locals` is the root object.
+When a page is rendered to a template the page instance is available as `page`
+in the template context. The content tree is also available as `contents` and
+`config.locals` is the root object.
 
 ## Plugins
 
-A plugin is a function that's called with the wintersmith environment and a callback.
+A plugin is a function that's called with the wintersmith environment and a
+callback.
 
-Plugins are loaded by adding a "require id" to `config.plugins`. This can be a path, local- or global module.
-It works just like you would expect a `require()` call to.
+Plugins are loaded by adding a "require id" to `config.plugins`. This can be a
+path, local- or global module. It works just like you would expect a
+`require()` call to.
 
 Plugin example:
 
@@ -260,6 +310,12 @@ Check the source or [api docs][docs] for a full list of methods.
 
 ## About
 
-Wintersmith is written by [Johan Nordberg](http://johan-nordberg.com) using [CoffeeScript](http://coffeescript.org/) and licensed under the [MIT-license](http://en.wikipedia.org/wiki/MIT_License).
+Wintersmith was written by [Johan Nordberg](http://johan-nordberg.com) using
+[CoffeeScript](http://coffeescript.org/) and licensed under the
+[MIT-license](http://en.wikipedia.org/wiki/MIT_License).
 
-The name is a nod to [blacksmith](https://github.com/flatiron/blacksmith) which inspired this project.
+The name is a nod to [blacksmith](https://github.com/flatiron/blacksmith) which
+inspired this project.
+
+This fork is maintained _(hah.)_ by [Jake Teton-Lanids](http://jake.teton-landis.org)
+since Johan hasn't pushed code to the original Wintersmith in over a year.
