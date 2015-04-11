@@ -1,7 +1,10 @@
 {
-  "name": "wintersmith",
-  "version": "2.1.1-pre",
-  "author": "Johan Nordberg <code@johan-nordberg.com>",
+  "name": "wintersmith2",
+  "version": "2.1.1-dev",
+  "contrubutors": [
+    { "name": "Johan Nordberg", "email": "code@johan-nordberg.com" },
+    { "name": "Jake Teton-Landis", "email": "just.1.jake@gmail.com" }
+  ],
   "description": "A flexible static site generator.",
   "license": "MIT",
   "main": "./lib/",
@@ -9,10 +12,11 @@
     "static",
     "generator",
     "markdown",
-    "jade"
+    "jade",
+    "fork"
   ],
   "bin": {
-    "wintersmith": "./bin/wintersmith"
+    "wintersmith2": "./bin/wintersmith"
   },
   "scripts": {
     "prepublish": "node ./bin/dev/compile_coffee"
@@ -22,13 +26,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jnordberg/wintersmith.git"
+    "url": "https://github.com/justjake/wintersmith.git"
   },
   "dependencies": {
     "marked": "~0.3.0",
     "coffee-script": "~1.6.3",
     "async": "~0.2.9",
-    "highlight.js": "~8.0.0",
+    "highlight.js": "~8.2.0",
     "jade": "~1.1.5",
     "ncp": "~0.5.0",
     "rimraf": "~2.2.6",
@@ -39,7 +43,7 @@
     "mime": "~1.2.11",
     "js-yaml": "~3.0.1",
     "mkdirp": "~0.3.5",
-    "chokidar": "~0.8.1",
+    "chokidar": "~1.0.0",
     "server-destroy": "~1.0.0",
     "npm": "~1.3.24",
     "slugg": "~0.1.2"
