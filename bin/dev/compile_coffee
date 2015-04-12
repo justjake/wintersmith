@@ -12,20 +12,20 @@ var cs = require('coffee-script');
 var path = require('path');
 
 console.log('Compiling CoffeeScript');
+var cs_path = './node_modules/.bin/coffee'
+var command = [
+  cs_path,
+  '--compile',
+  '--map',
+  '--output',
+  './lib/',
+  './src/'
+].join(' ')
 
-var files = ls('-R', './src'), file, _in, _out;
-for (var i = 0; i < files.length; i++) {
-  file = files[i];
-  if (file == 'cli/version.coffee') continue; // written by compile script later
-  if (file.match(/\.coffee$/)) {
-  	_in = path.join('./src', file)
-  	_out = path.join('./lib', file.replace(/\.coffee$/, '.js'));
-  	console.log('  ' + _in + ' ->' + _out);
-    cs.compile(cat(_in)).to(_out);
-  } else {
-    mkdir('-p', './lib/' + file);
-  }
-}
+console.error('running', command)
+
+var result = exec(command)
+console.error(result.output)
 
 // write version to lib/cli/version.js
 var version = JSON.parse(cat('package.json')).version;
